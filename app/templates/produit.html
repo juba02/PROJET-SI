@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    {%load static%}
+  <head>
+    <title>Page des produits</title>
+    <link rel="stylesheet" href="{%static 'produit.css'%}">
+  </head>
+  <body>
+    <h1>Liste des produits</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Désignation</th>
+          <th>Type</th>
+          <th>Prix acheté</th>
+          <th>Prix vendu</th>
+          <th>Quantité</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for produit in produit %}
+        <tr>
+          <td>{{ produit.nom_p}}</td>
+          <td>{{ produit.type_produit.nom_t}}</td>
+          <td>{{ produit.prix_HT}}</td>
+          <td>{{ produit.prix_vd }}</td>
+          <td>{{ produit.quantite }}</td>
+          <td>
+            <a href="{%url 'voir' produit.id %}">Voir</a>
+            <a href="{%url 'modifier_produit' produit.id%}">Modifier</a>
+            <a href="{%url 'supprime_prd' produit.id%}">Supprimer</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{%url 'ajoutprd' %}">Ajouter un produit</a>
+    <a href="{%url 'recherche_produit'%}">Rechercher</a>
+    <button onclick="window.print()">Imprimer la liste</button>
+  </body>
+</html>

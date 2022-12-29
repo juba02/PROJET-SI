@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    {%load static%}
+  <head>
+    <title>Page des Fournisseurs</title>
+    <link rel="stylesheet" href="{%static 'produit.css'%}">
+  </head>
+  <body>
+    <h1>Liste des Fournisseurs</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>nom</th>
+          <th>prenom</th>
+          <th>adresse</th>
+          <th>telephone</th>
+          <th>solde</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fournisseur in fournisseurs %}
+        <tr>
+          <td>{{ fournisseur.nom_f }}</td>
+          <td>{{ fournisseur.prenom_f}}</td>
+          <td>{{ fournisseur.adresse_f}}</td>
+          <td>{{ fournisseur.telephone_f }}</td>
+          <td>{{ fournisseur.solde }}</td>
+          <td>
+            <a href="{%url 'modifier_fournisseur' fournisseur.id%}">Modifier</a>
+            <a href="{%url 'supprime_fournisseur' fournisseur.id%}">Supprimer</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{%url 'Ajout_fournisseur' %}">Ajouter un Fournisseur</a>
+    <a href="{%url 'recherche_fournisseur'%}">Rechercher</a>
+    <button onclick="window.print()">Imprimer la liste</button>
+  </body>
+</html>

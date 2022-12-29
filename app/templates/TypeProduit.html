@@ -1,0 +1,27 @@
+<html lang="en">
+    {%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type de produit</title>
+    <link rel="stylesheet" href="{%static 'typeProduit.css'%}">
+</head>
+<body>
+    <h1>Ici vous pouvez retrouvez tous type de produit que nous proposons</h1>
+    <ul>
+        {%for Tp in TypeProduit %}
+        <li>
+          <div class="type-produit">
+             <p>{{Tp.nom_t}}</p>
+             <a href="{%url 'modifier_type' Tp.id%}">Modifier</a>
+             <a href="{%url 'supprime_type' Tp.id%}">Supprimer</a>
+          </div>
+        </li>
+        {%endfor%}
+    </ul>
+    <a href="{%url 'AjoutType' %}">Ajouter un produit</a>
+    <a href="{%url 'recherche_type'%}">Rechercher</a>
+    <button onclick="window.print()">Imprimer la liste</button>
+</body>
+</html>

@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #333;
+    margin: 30px 0;
+  }
+  
+  .ajout-produit {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+  }
+  
+  .ajout-produit p {
+    margin: 10px 0;
+  }
+  
+  .ajout-produit label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .ajout-produit input[type="text"],
+  .ajout-produit input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #444;
+  }
+  
+  .ajout-produit input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .ajout-produit input[type="submit"]:hover {
+    background-color: #444;
+  }
+  
+  .ajout-produit a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ccc;
+    color: #444;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .ajout-produit a:hover {
+    background-color: #ddd;
+  }
+  
+  p.message {
+    color: green;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  

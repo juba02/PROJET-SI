@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  {%load static%}
+  <head>
+    <meta charset="utf-8">
+    <title>Gestion de stock</title>
+    <link rel="stylesheet" href="{%static 'style.css'%}">
+  </head>
+  <body>
+    <header>
+      <h1>Gestion de stock</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="{%url 'acceuil'%}">Accueil</a></li>
+        <li><div class="dropdown">
+          <button class="dropdown-button">Ressources</button>
+          <div class="dropdown-content">
+            <a href="{% url 'produit'%}">Produits</a>
+            <a href="{%url 'TypeProduit'%}">Type de produits</a>
+            <a href="#">Clients</a>
+            <a href="{% url 'fournisseurs'%}">Fournisseurs</a>
+          </div>
+        </li>
+        <li><div class="dropdown">
+          <button class="dropdown-button">Achat</button>
+          <div class="dropdown-content">
+            <a href="{%url 'BonDeCmd'%}">Bon De Commande</a>
+            <a href="#">BL</a>
+            <a href="#">Facture</a>
+            <a href="#">Reglement</a>
+          </div>
+        </li>
+        <li><div class="dropdown">
+          <button class="dropdown-button">Stock</button>
+          <div class="dropdown-content">
+            <a href="#">Etat Stock</a>
+            <a href="{%url 'Entree'%}">Entrées en stock</a>
+            <a href="#">Sortie de Stock</a>
+          </div>
+        </li>
+        <li><div class="dropdown">
+          <button class="dropdown-button">Ventes</button>
+          <div class="dropdown-content">
+            <a href="#">Ventes Au Comptoires</a>
+            <a href="#">Paiement crédit</a>
+          </div>
+        </li>
+        <li><div class="dropdown">
+          <button class="dropdown-button">Analyse</button>
+          <div class="dropdown-content">
+            <a href="#">Analyse Achat</a>
+            <a href="#">Analyse Vente</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    </div>
+    <main>
+      <h2>Bienvenue dans notre application de gestion de stock !</h2>
+      <p>Notre application vous permet de suivre les niveaux de stock de vos produits, de gérer vos achats et vos ventes, et de disposer des bons produits au bon endroit et au bon moment.</p>
+      <p>Pour commencer, utilisez le menu ci-dessus pour accéder aux différentes fonctionnalités de notre application.</p>
+    </main>
+    <footer>
+      <p>Copyright 2021 - Gestion de stock</p>
+    </footer>
+  </body>
+</html>
+
