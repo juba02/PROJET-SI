@@ -10,16 +10,19 @@ urlpatterns = [
     path('produit/<int:pk>/Supprimer', views.supprime_prd, name='supprime_prd'),
     path('produit/<int:pk>/modifier/', views.modifier_produit, name='modifier_produit'),
     path("produit/recherche produit/", views.rechercher_produits, name='recherche_produit'),
+    
     path('TypeProduit/', views.type, name='TypeProduit'),
     path('TypeProduit/AjoutType', views.AjoutType, name='AjoutType'),
     path('TypeProduit/<int:pk>/Supprimer', views.supprime_type, name='supprime_type'),
     path('TypeProduit/<int:pk>/modifier/', views.modifier_type, name='modifier_type'),
     path("TypeProduit/recherche type/", views.rechercher_type, name='recherche_type'),
+    
     path('Fournisseurs/', views.fournisseurs, name='fournisseurs'),
     path('Fournisseurs/Ajout_fournisseur/', views.Ajout_fournisseur, name='Ajout_fournisseur'),
     path('Fournisseurs/<int:pk>/supprime_fournisseur/', views.supprime_fournisseur, name='supprime_fournisseur'),
     path('Fournisseurs/<int:pk>/modifier_fournisseur/', views.modifier_fournisseur, name='modifier_fournisseur'),
     path("Fournisseurs/recherche fournisseurs/", views.rechercher_fournisseur, name='recherche_fournisseur'),
+    
     path("Entree/", views.Entree, name="Entree"),
     path("Bon De Commande/", views.affiche_BonDeCmd, name="BonDeCmd"),
     path("Bon De Commande/Ajout_BonDeCmd", views.ajouter_bon_de_commande, name="Ajout_BonDeCmd"),
