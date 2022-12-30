@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    {%load static%}
+  <head>
+    <title>Page des produits</title>
+    <link rel="stylesheet" href="{%static 'produit.css'%}">
+  </head>
+  <body>
+    <h1>Liste des entrées</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Numéro d'entrée</th>
+          <th>Date</th>
+          <th>Fournisseur</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entreeStock in EntreeStock %}
+        <tr>
+          <td>{{ entreeStock.numero_e}}</td>
+          <td>{{ entreeStock.date_e}}</td>
+          <td>{{ entreeStock.fournisseur.nom_f}} {{entreeStock.fournisseur.prenom_f}}</td>
+          <td>
+            <a href="{%url 'modifier_entreeStock' entreeStock.id%}">Modifier</a>
+            <a href="{%url 'supprimer_entreeStock' entreeStock.id%}">Supprimer</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{%url 'ajouter_entreeStock' %}">Ajouter une entrée </a>
+    <a href="{%url 'rechercher_entreeStock'%}">Rechercher</a>
+    <button onclick="window.print()">Imprimer la liste</button>
+  </body>
+</html>

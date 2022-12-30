@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{%static 'produit.css'%}">
 </head>
 <body>
 <form action='' method="get" class="form">
@@ -14,11 +14,28 @@
 <button type="submit" class=""> demarrer la recherche </button>
 </form>
 <h4> resultat de reherche : </h4>
-<ul>
-{% for product in products %}
-<li>Nom du produit: {{ product.nom_p }}, son prix de vente: {{ product.prix_vd }} Da. </li>
-{% endfor %}
-</ul>
+<table>
+    <thead>
+      <tr>
+        <th>Désignation</th>
+        <th>Type</th>
+        <th>Prix acheté</th>
+        <th>Prix vendu</th>
+        <th>Quantité</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.nom_p}}</td>
+        <td>{{ product.type_produit.nom_t}}</td>
+        <td>{{ product.prix_HT}}</td>
+        <td>{{ product.prix_vd }}</td>
+        <td>{{ product.quantite }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
 </body>
 </html>

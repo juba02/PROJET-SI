@@ -5,22 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Type de produit</title>
-    <link rel="stylesheet" href="{%static 'typeProduit.css'%}">
+    <link rel="stylesheet" href="{%static 'produit.css'%}">
 </head>
 <body>
-    <h1>Ici vous pouvez retrouvez tous type de produit que nous proposons</h1>
-    <ul>
-        {%for Tp in TypeProduit %}
-        <li>
-          <div class="type-produit">
-             <p>{{Tp.nom_t}}</p>
-             <a href="{%url 'modifier_type' Tp.id%}">Modifier</a>
-             <a href="{%url 'supprime_type' Tp.id%}">Supprimer</a>
-          </div>
-        </li>
-        {%endfor%}
-    </ul>
-    <a href="{%url 'AjoutType' %}">Ajouter un produit</a>
+    <h1>Liste des Types de produit</h1>
+    <table>
+        <thead>
+          <tr>
+            <th>Code Type</th>
+            <th>Nom du Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for Tp in TypeProduit %}
+          <tr>
+            <td>{{ Tp.id}}</td>
+            <td>{{ Tp.nom_t}}</td>
+            <td>
+              <a href="{%url 'modifier_type' Tp.id%}">Modifier</a>
+              <a href="{%url 'supprime_type' Tp.id%}">Supprimer</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    <a href="{%url 'AjoutType' %}">Ajouter un Type produit</a>
     <a href="{%url 'recherche_type'%}">Rechercher</a>
     <button onclick="window.print()">Imprimer la liste</button>
 </body>

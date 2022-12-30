@@ -1,20 +1,25 @@
 from django.shortcuts import render, redirect
-from .models import Produit, TypeProduit, BonDeCmd, Fournisseur, Produit_BonDeCmd
-from .forms import ProduitForm, TypeForm, BonForm, LigneBonDeCommandeFormSet, LigneBonDeCommandeForm, FournisseurForm
+from .models import EntreeStock, Produit, ProduitEntreeStock, TypeProduit, BonDeCmd, Fournisseur, Produit_BonDeCmd
+from .forms import EntreeStockForm, ProduitEntreeStockForm, ProduitForm, TypeForm, BonForm, LigneBonDeCommandeFormSet, LigneBonDeCommandeForm, FournisseurForm
 
 # Create your views here.
 def acceuil(request):
     return render(request, "acceuil.html")
 
+
+############Produit####################
 def produits(request):
     product = Produit.objects.all()
     return render(request, 'produit.html', {"produit" : product})
+
+
 def voir(request, pk):
     try:
         product = Produit.objects.get(id=pk)
         return render(request, 'voir.html', {"produit" : product})
     except Produit.DoesNotExist:
         redirect('/acceuil')
+
 def ajoutprd(request):
     if request.method == 'POST':
         form = ProduitForm(request.POST)
@@ -29,10 +34,12 @@ def ajoutprd(request):
             form = ProduitForm()
             msg = "Remplissez tous les champs"
             return render(request, "AjoutProduit.html", {"form":form, "message":msg})
+
 def supprime_prd(request, pk):
     produit = Produit.objects.get(id=pk)
     produit.delete()
     return redirect('produit')
+
 def modifier_produit(request, pk):
     produit = Produit.objects.get(id=pk)
     if request.method == 'POST':
@@ -49,6 +56,8 @@ def modifier_produit(request, pk):
             'quantite':produit.quantite
         })
     return render(request, 'modifier_produit.html', {'form': form})
+
+
 def rechercher_produits (request):
     produits =""
     if (request.method =="GET"):
@@ -56,10 +65,13 @@ def rechercher_produits (request):
         if query:
              produits=Produit.objects.filter(nom_p__contains = query)
         return render(request, "search_p.html",{"products": produits})
-#######################################################################
+
+
+##################  Type  ###############################
 def type(request):
     tp = TypeProduit.objects.all()
     return render(request, 'TypeProduit.html', {"TypeProduit":tp}) 
+
 def AjoutType(request):
     if request.method == 'POST':
         form = TypeForm(request.POST)
@@ -74,10 +86,14 @@ def AjoutType(request):
         form = TypeForm()
         msg = "Remplissez tous les champs"
         return render(request, "AjoutType.html", {"form":form, "message":msg})
+
+
 def supprime_type(request, pk):
     type = TypeProduit.objects.get(id=pk)
     type.delete()
     return redirect('TypeProduit')
+
+
 def modifier_type(request, pk):
     type = TypeProduit.objects.get(id=pk)
     if request.method == 'POST':
@@ -90,6 +106,8 @@ def modifier_type(request, pk):
             'nom_t':type.nom_t
         })
     return render(request, 'modifier_type.html', {'form': form})
+
+
 def rechercher_type (request):
     type =""
     if (request.method =="GET"):
@@ -97,7 +115,9 @@ def rechercher_type (request):
         if query:
             type=TypeProduit.objects.filter(nom_t__contains = query)
         return render(request, "search_t.html",{"types": type})
-################################################################""""
+
+
+#########################  Fournisseur  ################################
 def fournisseurs(request):
     fournisseurs = Fournisseur.objects.all()
     return render(request, 'fournisseurs.html', {"fournisseurs": fournisseurs})
@@ -117,10 +137,12 @@ def Ajout_fournisseur(request):
         form = FournisseurForm()
         msg = "Remplissez tous les champs"
         return render(request, "Ajout_fournisseur.html", {"form":form, "message":msg})
+
 def supprime_fournisseur(request, pk):
     fournisseur = Fournisseur.objects.get(id=pk)
     fournisseur.delete()
     return redirect('fournisseurs')
+
 def modifier_fournisseur(request, pk):
     fournisseur = Fournisseur.objects.get(id=pk)
     if request.method == 'POST':
@@ -137,6 +159,7 @@ def modifier_fournisseur(request, pk):
             'solde':fournisseur.solde
         })
     return render(request, 'modifier_fournisseur.html', {'form': form})
+
 def rechercher_fournisseur (request):
     fournisseur =""
     if (request.method =="GET"):
@@ -145,18 +168,7 @@ def rechercher_fournisseur (request):
             fournisseur=Fournisseur.objects.filter(nom_f__contains = query)
         return render(request, "search_f.html",{"fournisseurs": fournisseur})
 
-
-
-
-
-
-
-
-
-
-
-
-
+################ achat  ###################################
 
 
 def Entree(request):
@@ -226,3 +238,108 @@ def supprime_bon(request, pk):
     bon = BonDeCmd.objects.get(id=pk)
     bon.delete()
     return redirect('BonDeCmd')
+
+
+################### produitEntreeStock  #################
+
+def produitEntreeStock(request):
+    produitsEntreeStock = ProduitEntreeStock.objects.all()
+    return render(request, 'etat_stock.html', {"ProduitEntreeStock": produitsEntreeStock}) 
+
+def ajouter_produitEntreeStock(request):
+    if request.method == 'POST':
+        form = ProduitEntreeStockForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = ProduitEntreeStockForm()
+            msg = "Entrée ajouter, vous pouvez ajouter un autre"
+        else : 
+            msg = "Remplissez tous les champs"
+        return render(request, "ajouter_produitEntreeStock.html", {"form": form, "message": msg})
+    else :
+        form = ProduitEntreeStockForm()
+        msg = "Remplissez tous les champs"
+        return render(request, "ajouter_produitEntreeStock.html", {"form":form, "message":msg})
+
+
+def supprimer_produitEntreeStock(request, pk):
+    type = TypeProduit.objects.get(id=pk)
+    type.delete()
+    return redirect('TypeProduit')
+
+
+def modifier_produitEntreeStock(request, pk):
+    type = TypeProduit.objects.get(id=pk)
+    if request.method == 'POST':
+        form = TypeForm(request.POST, instance=type)
+        if form.is_valid():
+            form.save()
+            return redirect('TypeProduit')
+    else:
+        form = TypeForm(initial={
+            'nom_t':type.nom_t
+        })
+    return render(request, 'modifier_type.html', {'form': form})
+
+
+def rechercher_produitEntreeStock(request):
+    type =""
+    if (request.method =="GET"):
+        query=request.GET.get('recherche')
+        if query:
+            type=TypeProduit.objects.filter(nom_t__contains = query)
+        return render(request, "search_t.html",{"types": type})
+
+
+
+####################################################################
+############## Entrée Stock ########################################
+####################################################################
+
+def entreeStock(request):
+    entreeStock = EntreeStock.objects.all()
+    return render(request, 'entreeStock.html', {"EntreeStock": entreeStock}) 
+
+
+def ajouter_entreeStock(request):
+    if request.method == 'POST':
+        form = EntreeStockForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = EntreeStockForm()
+            msg = "Entrée Stock ajouté"
+            return redirect("ajouter_produitEntreeStock")
+        else : 
+            msg = "Remplissez tous les champs"
+            return render(request, "ajouter_entreeStock.html", {"form": form, "message": msg})
+    else :
+        form = EntreeStockForm()
+        msg = "Remplissez tous les champs"
+        return render(request, "ajouter_entreeStock.html", {"form":form, "message":msg})
+
+
+def supprimer_entreeStock(request, pk):
+    entree = EntreeStock.objects.get(id=pk)
+    entree.delete()
+    return redirect('entreeStock')
+
+
+def modifier_entreeStock(request, pk):
+    entree = EntreeStock.objects.get(id=pk)
+    if request.method == 'POST':
+        form = EntreeStockForm(request.POST, instance=entree)
+        if form.is_valid():
+            form.save()
+            return redirect('entreeStock')
+    else:
+        form = EntreeStockForm(instance = entree)
+    return render(request, 'modifier_entreeStock.html', {'form': form})
+
+
+def rechercher_entreeStock(request):
+    entree =""
+    if (request.method =="GET"):
+        query=request.GET.get('recherche')
+        if query:
+            entree=EntreeStock.objects.filter(date_e__contains = query)
+        return render(request, "search_eStock.html", {"Entree": entree})

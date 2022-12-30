@@ -1,0 +1,36 @@
+<html lang="en">
+    {%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'produit.css'%}">
+</head>
+<body>
+    <form action='' method="get" class="form">
+        <label for="search"> Entrez la date de l'entrée : </label>
+        <input type="date" name="recherche" id="search">
+        <button type="submit" class=""> demarrer la recherche </button>
+    </form>
+    <h4> Resultat de reherche : </h4>
+    <table>
+        <thead>
+          <tr>
+            <th>Numéro d'entrée</th>
+            <th>Date</th>
+            <th>Fournisseur</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entree in Entree %}
+          <tr>
+            <td>{{ entree.numero_e}}</td>
+            <td>{{ entree.date_e}}</td>
+            <td>{{ entree.fournisseur.nom_f}} {{entree.fournisseur.prenom_f}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</body>
+</html>

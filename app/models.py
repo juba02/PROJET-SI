@@ -5,6 +5,8 @@ from datetime import datetime
 
 class TypeProduit(models.Model):
     nom_t = models.CharField(max_length=100)
+    def __str__(self):
+        return str(self.nom_t)
 
 class Produit(models.Model):
     nom_p = models.CharField(max_length=100)
@@ -12,12 +14,16 @@ class Produit(models.Model):
     prix_vd = models.DecimalField(max_digits=10, decimal_places=2)
     type_produit = models.ForeignKey(TypeProduit, on_delete=models.CASCADE)
     quantite = models.PositiveIntegerField()
+    def __str__(self):
+        return str(self.nom_p)
 
 class Client(models.Model):
     nom_c = models.CharField(max_length=100)
     prenom_c = models.CharField(max_length=100)
     adresse_c = models.TextField()
     telephone_c = models.CharField(max_length=20)
+    def __str__(self):
+        return str(self.nom_c)
 
 class Fournisseur(models.Model):
     nom_f = models.CharField(max_length=100)
@@ -25,11 +31,15 @@ class Fournisseur(models.Model):
     adresse_f = models.TextField()
     telephone_f = models.CharField(max_length=20)
     solde = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    def __str__(self):
+        return str(self.nom_f +" "+ self.prenom_f)
 
 class EntreeStock(models.Model):
     numero_e = models.CharField(max_length=20)
     date_e = models.DateField()
     fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.numero_e)
 
 class ProduitEntreeStock(models.Model):
     entree_stock = models.ForeignKey(EntreeStock, on_delete=models.CASCADE)
