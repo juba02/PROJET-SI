@@ -39,7 +39,7 @@ class EntreeStock(models.Model):
     date_e = models.DateField()
     fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
     def __str__(self):
-        return str(self.numero_e)
+        return str(self.numero_e + " "+ self.fournisseur.nom_f)
 
 class ProduitEntreeStock(models.Model):
     entree_stock = models.ForeignKey(EntreeStock, on_delete=models.CASCADE)

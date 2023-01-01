@@ -21,12 +21,45 @@
         </tr>
       </thead>
       <tbody>
+        <h3>Choisir les champs à filtrer et remplissez-les </h3>
+        <form action="" method="get" id="filterForm">
+
+          <label for="max_price"> Prix maximum : </label>
+          <input type="text" name="max_price" id="max_price"><br>
+          
+          <label for="min_price"> Prix minimum : </label>
+          <input type="text" name="min_price" id="min_price"><br>
+
+
+          <label for="type">Type du Produit :  </label>
+          <select name="type" id="type">
+            <option value="">-</option>
+            {% for type in TypeProduits %}
+            <option value="{{type.id}}">{{type.nom_t}}</option>
+            {% endfor %}
+          </select><br>
+
+          <label for="produit">Produit :  </label>
+          <select name="produit" id="produit">
+            <option value="">-</option>
+            {% for produit in Produits %}
+            <option value="{{produit.id}}">{{produit.nom_p}}</option>
+            {% endfor %}
+          </select><br><br>
+
+          <input type="submit" value="Filtrer">
+          <a href="{% url 'produitEntreeStock' %}">Réinisialier la recherche</a>
+        </form>
+
+        <br>
+        <br>
+
         {% for produitEntreeStock in ProduitEntreeStock %}
         <tr>
             <td>{{ produitEntreeStock.produit.nom_p}}</td>
             <td>{{ produitEntreeStock.produit.type_produit.nom_t}}</td>
-            <td>{{ produitEntreeStock.produit.prix_HT}}</td>
-            <td>{{ produitEntreeStock.produit.prix_vd }}</td>
+            <td>{{ produitEntreeStock.prix_unite_ht}}</td>
+            <td>{{ produitEntreeStock.produit.prix_vd}}</td>
             <td>{{ produitEntreeStock.entree_stock.fournisseur.nom_f}} {{ produitEntreeStock.entree_stock.fournisseur.prenom_f}}</td>
             <td>{{ produitEntreeStock.quantite }}</td>
             <td>{{ produitEntreeStock.entree_stock.date_e }}</td>

@@ -243,8 +243,26 @@ def supprime_bon(request, pk):
 ################### produitEntreeStock  #################
 
 def produitEntreeStock(request):
+    TypeProduits= TypeProduit.objects.all()
     produitsEntreeStock = ProduitEntreeStock.objects.all()
-    return render(request, 'etat_stock.html', {"ProduitEntreeStock": produitsEntreeStock}) 
+    Produits = Produit.objects.all()
+
+    min_price = request.GET.get('min_price', '')
+    max_price = request.GET.get('max_price', '')
+    typeid= request.GET.get('type', '')
+    produitid= request.GET.get('produit', '')
+
+    
+    if max_price:
+        produitsEntreeStock = produitsEntreeStock.filter(prix_unite_ht__lte = max_price)
+    if min_price:
+        produitsEntreeStock = produitsEntreeStock.filter(prix_unite_ht__gte = min_price)
+    if typeid:
+        produitsEntreeStock = produitsEntreeStock.filter(produit__type_produit__id = typeid)
+    if produitid:
+        produitsEntreeStock = produitsEntreeStock.filter(produit__id = produitid)
+     
+    return render(request, 'etat_stock.html', {"ProduitEntreeStock": produitsEntreeStock, "TypeProduits":TypeProduits, "Produits":Produits}) 
 
 def ajouter_produitEntreeStock(request):
     if request.method == 'POST':
@@ -311,7 +329,7 @@ def ajouter_entreeStock(request):
             return redirect("ajouter_produitEntreeStock")
         else : 
             msg = "Remplissez tous les champs"
-            return render(request, "ajouter_entreeStock.html", {"form": form, "message": msg})
+            return render(request, "ajouter_entreeStock.html")
     else :
         form = EntreeStockForm()
         msg = "Remplissez tous les champs"
